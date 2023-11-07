@@ -23,8 +23,7 @@ jobs:
         id: check_tailscale_update
         run: |
           pip install requests
-          python scripts/check_version.py
-          env | grep 'HAS_UPDATE'
+          HAS_UPDATE=$(python scripts/check_version.py)
           echo "::set-output name=has_update::$HAS_UPDATE"
     outputs:
       has_update: ${{ steps.check_tailscale_update.outputs.has_update }}

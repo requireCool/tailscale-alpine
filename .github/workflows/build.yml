@@ -22,7 +22,7 @@ jobs:
       - name: Check tailscale Update
         id: check_tailscale_update
         run: |
-          ls
+          pip install requests
           python scripts/check_version.py
           env | grep 'HAS_UPDATE'
           echo "::set-output name=has_update::$HAS_UPDATE"

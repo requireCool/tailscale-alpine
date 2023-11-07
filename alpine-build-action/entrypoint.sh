@@ -7,6 +7,6 @@ abuild-keygen -a -i -n
 # export PACKAGER_PUBKEY="${ABUILD_DIR}/$(ls -1rt ${ABUILD_DIR} | grep \.rsa\.pub | tail -n 1 | tail -n 1)"
 
 abuild -F checksum && abuild -F -r
-ls /github/workspace
-find -n *.apk /
+
+find -name *.apk /
 #cp /github/x86_64/*.apk ./

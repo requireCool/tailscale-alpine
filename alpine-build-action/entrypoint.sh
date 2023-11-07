@@ -1,8 +1,7 @@
 echo "list env"
 ls /env
-echo "list workdir"
-ls /workdir
+echo "list current dir"
+ls
 
-cd /workdir
-abuild checksum && abuild -r
+abuild -F checksum && abuild -F -r
 ls

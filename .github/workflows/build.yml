@@ -17,12 +17,12 @@ jobs:
       - name: Alpine Build APK
         uses: ./alpine-build-action
 
-      - name: Publish
+      - name: Verify Artifacts
         run: ls packages
         
       - name: Upload Build Artifacts
         uses: actions/upload-artifact@v3
         with:
-          name: apk packages
+          name: tailscale.zip
           path: ${{ github.workspace }}/packages/*.apk
           

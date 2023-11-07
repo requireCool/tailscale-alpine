@@ -8,7 +8,26 @@ on:
   workflow_dispatch:
 
 jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+      
+      - name: Check tailscale Update
+        id: check_tailscale_update
+        run: |
+          python ./scripts/check_version.py
+          env | grep 'HAS_UPDATE'
+          echo "::set-output name=has_update::$HAS_UPDATE"
+    outputs:
+      has_update: ${{ steps.check_tailscale_update.outputs.has_update }}
+      
   build:
+    needs: check
+    if: needs.check.outputs.has_update == 'true'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout

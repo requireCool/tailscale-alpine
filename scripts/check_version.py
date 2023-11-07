@@ -1,11 +1,15 @@
 import os
+import re
 import requests
 
 
 tailscale_latest_release_url = 'https://api.github.com/repos/tailscale/tailscale/releases/latest'
-version = requests.get(tailscale_latest_release_url).json()['name']
+remote_version = requests.get(tailscale_latest_release_url).json()['name']
 
-if version == '1.52.2':
+with open('README.MD', 'r') as f:
+  build_version = re.findall(r'Latest build version: ([0-9.]+)', f.read())[0]
+
+if remote_version == build_version:
   print('false')
 else:
   print('true')

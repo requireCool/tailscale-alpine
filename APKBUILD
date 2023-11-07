@@ -46,6 +46,7 @@ build() {
 
 check() {
 	# shellcheck disable=SC2046
+        msg2 "Skip check..."
 	# go test $(go list ./... | grep -Ev '(util/linuxfw|net/netcheck|wgengine/magicsock|tstest/archtest|tstest/integration|tstest/jsdeps|tstest/iosdeps|ssh/tailssh|containerboot|net/connstats)')
 }
 

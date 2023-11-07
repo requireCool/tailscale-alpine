@@ -19,4 +19,10 @@ jobs:
 
       - name: Publish
         run: ls packages
+        
+      - name: Upload Build Artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: apk packages
+          path: ${{ github.workspace }}/packages/*.apk
           

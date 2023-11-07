@@ -1,7 +1,11 @@
 # action.yml
 name: 'Use alpine linux'
 description: ''
+inputs:
+  workdir: ${{ github.workspace }}
 runs:
   using: 'docker'
   image: 'Dockerfile'
+  args:
+    - ${{ inputs.workdir }}
   

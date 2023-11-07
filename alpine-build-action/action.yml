@@ -1,0 +1,7 @@
+# action.yml
+name: 'Use alpine linux'
+description: ''
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  

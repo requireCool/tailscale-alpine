@@ -24,7 +24,8 @@ jobs:
         run: |
           pip install requests
           HAS_UPDATE=$(python scripts/check_version.py)
-          echo "::set-output name=has_update::$HAS_UPDATE"
+          echo $HAS_UPDATE
+          echo "has_update=$HAS_UPDATE" >> $GITHUB_OUTPUT
     outputs:
       has_update: ${{ steps.check_tailscale_update.outputs.has_update }}
       

@@ -8,4 +8,5 @@ abuild-keygen -a -i -n
 
 abuild -F checksum && abuild -F -r
 
-cp /github/home/packages/github/x86_64/*.apk ./packages
+mkdir packages
+cp /github/home/packages/github/x86_64/*.apk packages

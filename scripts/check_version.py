@@ -4,9 +4,9 @@ import requests
 
 tailscale_latest_release_url = 'https://api.github.com/repos/tailscale/tailscale/releases/latest'
 version = requests.get(tailscale_latest_release_url).json()['name']
-print(version)
+print('current latest version: ' + version)
 
 if version == '1.52.1':
-  os.environ['HAS_UPDATE'] = 'false'
+  os.setenv('HAS_UPDATE', 'false')
 else:
-  os.environ['HAS_UPDATE'] = 'true'
+  os.setenv('HAS_UPDATE', 'true')

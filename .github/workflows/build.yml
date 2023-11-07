@@ -50,7 +50,3 @@ jobs:
         with:
           name: tailscale.zip
           path: packages/*.apk
-
-      - uses: ncipollo/release-action@v1
-        with:
-          artifacts: "packages/*.apk"

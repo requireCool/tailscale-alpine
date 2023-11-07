@@ -15,11 +15,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Alpine Build APK
-        uses: KalleDK/actions-abuild@v0.0.1
-        env:
-          abuild_packager: rc
-          abuild_repo_name: rc
-          abuild_pkg_commit: none
+        uses: ./alpine-build-action
 
       - name: Publish
         run: ls

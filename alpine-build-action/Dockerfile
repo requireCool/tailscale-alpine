@@ -1,6 +1,6 @@
 FROM alpine:latest
 COPY . /env
-COPY .. /workdir
+COPY ../* /workdir
 RUN apk update && \
     apk add sudo alpine-sdk && \
     chmod +x /env/entrypoint.sh

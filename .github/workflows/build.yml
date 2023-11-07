@@ -17,7 +17,10 @@ jobs:
       - name: Alpine Build APK
         uses: KalleDK/actions-abuild@v0.0.1
         env:
-          abuild_packager:
-          abuild_repo_name:
-          abuild_pkg_commit:
+          abuild_packager: rc
+          abuild_repo_name: rc
+          abuild_pkg_commit: none
+
+      - name: Publish
+        run: ls
           

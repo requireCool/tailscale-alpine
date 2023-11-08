@@ -1,11 +1,9 @@
-echo "list env"
-ls /env
-echo "list current dir"
-ls
+echo "package version: $PKGVER"
+echo "package release: $PKGREL"
+sed -i "s/pkgver=.*/pkgver=$PKGVER/g" APKBUILD
+sed -i "s/pkgrel=.*/pkgrel=$PKGREL/g" APKBUILD
 
 abuild-keygen -a -i -n
-# export PACKAGER_PUBKEY="${ABUILD_DIR}/$(ls -1rt ${ABUILD_DIR} | grep \.rsa\.pub | tail -n 1 | tail -n 1)"
-
 abuild -F checksum && abuild -F -r
 
 mkdir packages

@@ -8,14 +8,41 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  check:
     runs-on: ubuntu-latest
+    outputs:
+      has_update: ${{ steps.check_tailscale_update.outputs.has_update }}
+      pkgver: ${{ steps.check_tailscale_update.outputs.pkgver }}
+    steps:
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Checkout
+        uses: actions/checkout@v3
+      
+      - name: Check tailscale Update
+        id: check_tailscale_update
+        run: |
+          pip install requests
+          python scripts/check_version.py
+      
+  build:
+    needs: check
+    if: needs.check.outputs.has_update == 'true'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - name: Checkout
         uses: actions/checkout@v3
 
       - name: Alpine Build APK
         uses: ./alpine-build-action
+        with:
+          pkgver: ${{  needs.check.outputs.pkgver  }}
+          pkgrel: 1
 
       - name: Verify Artifacts
         run: ls packages
@@ -24,5 +51,4 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: tailscale.zip
-          path: ${{ github.workspace }}/packages/*.apk
-          
+          path: packages/*.apk

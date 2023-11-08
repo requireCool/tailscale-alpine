@@ -48,7 +48,7 @@ jobs:
       - name: Upload Build Artifacts
         uses: actions/upload-artifact@v3
         with:
-          name: tailscale.zip
+          name: tailscale-${{  needs.check.outputs.pkgver  }}
           path: packages/*.apk
 
   update:

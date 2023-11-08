@@ -1,3 +1,3 @@
 # tailscale-alpine
 
-Latest build version: 
+Latest build version: 1.50.1

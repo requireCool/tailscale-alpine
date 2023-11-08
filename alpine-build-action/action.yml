@@ -1,7 +1,17 @@
 # action.yml
 name: 'Use alpine linux'
 description: ''
+inputs:
+  pkgver:
+    description: package version
+    required: true
+  pkgrel:
+    description: package release number
+    required: true
 runs:
   using: 'docker'
   image: 'Dockerfile'
+  args:
+    - ${{ inputs.pkgver }}
+    - ${{ inputs.pkgrel }}
   

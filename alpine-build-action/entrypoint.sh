@@ -1,7 +1,7 @@
-echo $1
-echo $2
-sed -i "s/pkgver=.*/pkgver=$1/g" APKBUILD
-sed -i "s/pkgrel=.*/pkgrel=$2/g" APKBUILD
+echo $PKGVER
+echo $PKGREL
+sed -i "s/pkgver=.*/pkgver=$pkgver/g" APKBUILD
+sed -i "s/pkgrel=.*/pkgrel=$pkgrel/g" APKBUILD
 cat APKBUILD
 
 abuild-keygen -a -i -n

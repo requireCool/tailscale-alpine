@@ -52,3 +52,20 @@ jobs:
         with:
           name: tailscale.zip
           path: packages/*.apk
+
+  update:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+      
+    - name: Modify README.md
+      env:
+        BUILD_VER: ${{  needs.check.outputs.pkgver  }}
+      run: sed -i "s/Latest build version: .*/Latest build version: $BUILD_VER/g" README.md
+    
+    - name: Commit & Push changes
+      uses: actions-js/push@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}

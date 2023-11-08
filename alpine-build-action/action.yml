@@ -12,5 +12,5 @@ runs:
   using: 'docker'
   image: 'Dockerfile'
   env:
-    pkgver: ${{ inputs.pkgver }}
-    pkgrel: ${{ inputs.pkgrel }}
+    PKGVER: ${{ inputs.pkgver }}
+    PKGREL: ${{ inputs.pkgrel }}

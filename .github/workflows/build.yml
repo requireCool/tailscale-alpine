@@ -5,6 +5,8 @@ on:
     branches: [ "master", "develop" ]
   pull_request:
     branches: [ "master" ]
+  schedule: 
+    - cron: '0 8 * * mon'
   workflow_dispatch:
 
 jobs:
@@ -32,8 +34,6 @@ jobs:
     needs: check
     if: needs.check.outputs.has_update == 'true'
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -52,3 +52,21 @@ jobs:
         with:
           name: tailscale.zip
           path: packages/*.apk
+
+  update:
+    needs: [check, build]
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+      
+    - name: Modify README.md
+      env:
+        BUILD_VER: ${{  needs.check.outputs.pkgver  }}
+      run: sed -i "s/Latest build version:\ .*/Latest build version:\ $BUILD_VER/g" README.md
+    
+    - name: Commit & Push changes
+      uses: actions-js/push@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        branch: ${{  github.ref.name  }}

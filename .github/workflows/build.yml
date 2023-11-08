@@ -10,6 +10,9 @@ on:
 jobs:
   check:
     runs-on: ubuntu-latest
+    outputs:
+      has_update: ${{ steps.check_tailscale_update.outputs.has_update }}
+      pkgver: ${{ steps.check_tailscale_update.outputs.pkgver }}
     steps:
       - name: Set up Python
         uses: actions/setup-python@v4
@@ -23,11 +26,7 @@ jobs:
         id: check_tailscale_update
         run: |
           pip install requests
-          HAS_UPDATE=$(python scripts/check_version.py)
-          echo $HAS_UPDATE
-          echo "has_update=$HAS_UPDATE" >> $GITHUB_OUTPUT
-    outputs:
-      has_update: ${{ steps.check_tailscale_update.outputs.has_update }}
+          python scripts/check_version.py
       
   build:
     needs: check
@@ -42,7 +41,7 @@ jobs:
       - name: Alpine Build APK
         uses: ./alpine-build-action
         with:
-          pkgver: 1.52.1
+          pkgver: ${{  needs.check.outputs.pkgver  }}
           pkgrel: 1
 
       - name: Verify Artifacts

@@ -52,7 +52,7 @@ jobs:
           path: packages/*.apk
 
   update:
-    needs: build
+    needs: [check, build]
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
@@ -60,7 +60,7 @@ jobs:
       
     - name: Modify README.md
       env:
-        BUILD_VER: ${{  job.check.outputs.pkgver  }}
+        BUILD_VER: ${{  needs.check.outputs.pkgver  }}
       run: sed -i "s/Latest build version:\ .*/Latest build version:\ $BUILD_VER/g" README.md
     
     - name: Commit & Push changes

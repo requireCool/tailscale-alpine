@@ -41,6 +41,9 @@ jobs:
 
       - name: Alpine Build APK
         uses: ./alpine-build-action
+        with:
+          pkgver: 1.52.1
+          pkgrel: 1
 
       - name: Verify Artifacts
         run: ls packages

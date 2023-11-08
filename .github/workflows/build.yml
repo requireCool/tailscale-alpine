@@ -63,7 +63,7 @@ jobs:
     - name: Modify README.md
       env:
         BUILD_VER: ${{  needs.check.outputs.pkgver  }}
-      run: sed -i "s/Latest build version: .*/Latest build version: $BUILD_VER/g" README.md
+      run: sed -i "s/Latest build version:\ .*/Latest build version:\ $BUILD_VER/g" README.md
     
     - name: Commit & Push changes
       uses: actions-js/push@master

@@ -16,14 +16,14 @@ jobs:
       has_update: ${{ steps.check_update.outputs.has_update }}
       pkgver: ${{ steps.check_update.outputs.pkgver }}
     steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.x'
 
-      - name: Checkout
-        uses: actions/checkout@v3
-      
       - name: Check tailscale Update
         id: check_update
         run: |
@@ -53,20 +53,25 @@ jobs:
           name: tailscale-${{  needs.check.outputs.pkgver  }}
           path: packages/*.apk
 
-  upload:
+  update-script:
     needs: [check, build]
     runs-on: ubuntu-latest
+    env:
+      PKGVER: ${{  needs.check.outputs.pkgver  }}
     steps:
     - name: Checkout
       uses: actions/checkout@v3
 
     - name: Download Artifact
       uses: actions/download-artifact@v3
-      env:
-        PKGVER: ${{  needs.check.outputs.pkgver  }}
       with:
         name: tailscale-${{  env.PKGVER  }}
-        path: packages/${{  env.PKGVER  }}
+        path: packages
+
+    - name: Zip and Modify Script
+      run: |
+        cd packages && zip tailscale-${{ env.PKGVER }}.zip * && rm -f *.apk && cd ..
+        sed -i "s/PKG_ZIP_URL=.*/PKG_ZIP_URL=https:\/\/github\.com\/requireCool\/tailscale-alpine\/raw\/master\/packages\/tailscale-$PKGVER\.zip/g" scripts/install.sh
       
     - name: Commit & Push changes
       uses: actions-js/push@master

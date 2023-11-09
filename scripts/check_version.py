@@ -1,6 +1,6 @@
 import os
-import re
 import requests
+
 
 def write_output(key: str, value: str):
   os.system(f'echo "{key}={value}" >> $GITHUB_OUTPUT')
@@ -14,9 +14,10 @@ build_version = ''
 if os.path.exists('packages'):
   dirs = os.listdir('packages')
   dirs.sort(reverse=True)
-  build_version = dirs[0]
-  print('All dirs in packages:', dirs)
-  print('Latest build version:', build_version)
+  if len(dirs) > 0:
+    build_version = dirs[0].split('-')[1].rstrip('.zip')
+    print('All dirs in packages:', dirs)
+    print('Latest build version:', build_version)
 
 if remote_version == build_version:
   write_output('has_update', 'false')

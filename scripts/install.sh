@@ -13,4 +13,6 @@ PKG_ZIP_URL=""
 wget $PKG_ZIP_URL -O tailscale.zip
 unzip tailscale.zip
 
+service tailscale stop
 find . -name *.apk | xargs apk add --allow-untrusted
+service tailscale start

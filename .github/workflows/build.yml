@@ -51,18 +51,21 @@ jobs:
           name: tailscale-${{  needs.check.outputs.pkgver  }}
           path: packages/*.apk
 
-  update:
+  upload:
     needs: [check, build]
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
       uses: actions/checkout@v3
-      
-    - name: Modify README.md
+
+    - name: Download Artifact
+      uses: actions/download-artifact@v3
       env:
-        BUILD_VER: ${{  needs.check.outputs.pkgver  }}
-      run: sed -i "s/Latest build version:\ .*/Latest build version:\ $BUILD_VER/g" README.md
-    
+        PKGVER: ${{  needs.check.outputs.pkgver  }}
+      with:
+        name: tailscale-${{  env.PKGVER  }}
+        path: package/${{  env.PKGVER  }}
+      
     - name: Commit & Push changes
       uses: actions-js/push@master
       with:

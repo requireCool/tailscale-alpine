@@ -15,7 +15,7 @@ if os.path.exists('packages'):
   dirs = os.listdir('packages')
   dirs.sort(reverse=True)
   if len(dirs) > 0:
-    build_version = dirs[0].split('.')[0]
+    build_version = dirs[0].split('-')[1].rstrip('.zip')
     print('All dirs in packages:', dirs)
     print('Latest build version:', build_version)
 

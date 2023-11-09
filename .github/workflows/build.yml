@@ -64,7 +64,7 @@ jobs:
         PKGVER: ${{  needs.check.outputs.pkgver  }}
       with:
         name: tailscale-${{  env.PKGVER  }}
-        path: package/${{  env.PKGVER  }}
+        path: packages/${{  env.PKGVER  }}
       
     - name: Commit & Push changes
       uses: actions-js/push@master

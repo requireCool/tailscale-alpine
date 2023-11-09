@@ -1,6 +1,6 @@
 import os
-import re
 import requests
+
 
 def write_output(key: str, value: str):
   os.system(f'echo "{key}={value}" >> $GITHUB_OUTPUT')

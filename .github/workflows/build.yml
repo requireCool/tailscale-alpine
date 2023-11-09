@@ -53,20 +53,26 @@ jobs:
           name: tailscale-${{  needs.check.outputs.pkgver  }}
           path: packages/*.apk
 
-  upload:
+  update-script:
     needs: [check, build]
     runs-on: ubuntu-latest
+    env:
+      PKGVER: ${{  needs.check.outputs.pkgver  }}
     steps:
     - name: Checkout
       uses: actions/checkout@v3
 
     - name: Download Artifact
       uses: actions/download-artifact@v3
-      env:
-        PKGVER: ${{  needs.check.outputs.pkgver  }}
       with:
         name: tailscale-${{  env.PKGVER  }}
         path: packages/${{  env.PKGVER  }}
+
+    - name: Zip
+      run: |
+        cd packages
+        zip tailscale-${{ env.PKGVER }}.zip *
+        rm -f *.apk
       
     - name: Commit & Push changes
       uses: actions-js/push@master

@@ -70,7 +70,7 @@ jobs:
 
     - name: Zip and Modify Script
       run: |
-        cd packages && zip tailscale-${{ env.PKGVER }}.zip * && rm -f *.apk
+        cd packages && zip tailscale-${{ env.PKGVER }}.zip * && rm -f *.apk && cd ..
         sed -i "s/PKG_ZIP_URL=.*/PKG_ZIP_URL=https:\/\/github\.com\/requireCool\/tailscale-alpine\/raw\/master\/packages\/$PKGVER\/tailscale-$PKGVER\.zip/g" scripts/install.sh
       
     - name: Commit & Push changes

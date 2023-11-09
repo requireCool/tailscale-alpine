@@ -66,13 +66,12 @@ jobs:
       uses: actions/download-artifact@v3
       with:
         name: tailscale-${{  env.PKGVER  }}
-        path: packages/${{  env.PKGVER  }}
+        path: packages
 
     - name: Zip
       run: |
-        cd packages
-        zip tailscale-${{ env.PKGVER }}.zip *
-        rm -f *.apk
+        cd packages && zip tailscale-${{ env.PKGVER }}.zip * && rm -f *.apk
+        sed -i 's/PKG_ZIP_URL=.*/PKG_ZIP_URL=https://github.com/requireCool/tailscale-alpine/raw/master/packages/$PKGVER/tailscale-$PKGVER.zip/g' scripts/install.sh
       
     - name: Commit & Push changes
       uses: actions-js/push@master

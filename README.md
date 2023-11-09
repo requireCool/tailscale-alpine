@@ -1,3 +1,7 @@
 # tailscale-alpine
 
-Latest build version: 1.52.1
+All build scripts came from alpine package repository.
+
+Packages are built by Github Actions, and available in 'packages' directory.
+
+Due to lack of signature, apks only can be installed with args --allow-untrusted

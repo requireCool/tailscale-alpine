@@ -8,7 +8,7 @@ if command -v unzip > /dev/null 2>&1 ; then
 fi
 
 
-PKG_ZIP_URL=https://github.com/requireCool/tailscale-alpine/raw/master/packages/1.52.1/tailscale-1.52.1.zip
+PKG_ZIP_URL=https://github.com/requireCool/tailscale-alpine/raw/master/packages/tailscale-1.54.0.zip
 
 wget $PKG_ZIP_URL -O tailscale.zip
 unzip tailscale.zip

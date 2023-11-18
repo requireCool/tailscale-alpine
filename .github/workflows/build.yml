@@ -73,7 +73,7 @@ jobs:
         cd packages/new
         zip tailscale-${{ env.PKGVER }}.zip *
         mv tailscale-${{ env.PKGVER }}.zip .. 
-        cd ../../
+        cd $GITHUB_WORKSPACE
         rm -rf package/new
         sed -i "s/PKG_VER=.*/PKG_VER=$PKGVER/g" scripts/install.sh
       

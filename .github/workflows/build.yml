@@ -72,6 +72,7 @@ jobs:
       run: |
         cd packages
         zip tailscale-${{ env.PKGVER }}.zip *.apk
+        rm -rf *.apk
         cd ..
         sed -i "s/PKG_VER=.*/PKG_VER=$PKGVER/g" scripts/install.sh
       

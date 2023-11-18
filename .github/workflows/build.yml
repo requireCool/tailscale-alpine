@@ -66,15 +66,13 @@ jobs:
       uses: actions/download-artifact@v3
       with:
         name: tailscale-${{  env.PKGVER  }}
-        path: packages/new
+        path: packages
 
     - name: Zip and Modify Script
       run: |
-        cd packages/new
-        zip tailscale-${{ env.PKGVER }}.zip *
-        mv tailscale-${{ env.PKGVER }}.zip .. 
-        cd $GITHUB_WORKSPACE
-        rm -rf package/new
+        cd packages
+        zip tailscale-${{ env.PKGVER }}.zip *.apk
+        cd ..
         sed -i "s/PKG_VER=.*/PKG_VER=$PKGVER/g" scripts/install.sh
       
     - name: Commit & Push changes

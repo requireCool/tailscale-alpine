@@ -1,20 +1,18 @@
 #!/bin/bash
-if command -v unzip > /dev/null 2>&1 ; then
-  apk update && apk add unzip
-fi
+PKG_VER=1.54.0
+PKG_ZIP_NAME=tailscale-$PKG_VER.zip
+PKG_ZIP_URL=https://cdn.jsdelivr.net/gh/requireCool/tailscale-alpine@master/packages/$PKG_ZIP_NAME
 
-if command -v wget > /dev/null 2>&1 ; then
-  apk update && apk add wget
-fi
+wget $PKG_ZIP_URL
+if [ ! -n $PKG_ZIP_NAME ]; then
+  echo "archive not exist"
+  exit 1
 
-
-PKG_ZIP_URL=https://cdn.jsdelivr.net/gh/requireCool/tailscale-alpine@master/packages/tailscale-1.54.0.zip
-
-wget $PKG_ZIP_URL -O tailscale.zip
-unzip tailscale.zip
+unzip $PKG_ZIP_NAME -d tailscale-$PKG_VER
 
 service tailscale stop
-find . -name *.apk | xargs apk add --allow-untrusted
+find . -name "*.apk" | xargs apk add --allow-untrusted
 service tailscale start
 
-rm -f tailscale.zip
+rm -f $PKG_ZIP_NAME
+rm -rf tailscale-$PKG_VER

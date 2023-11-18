@@ -1,12 +1,13 @@
 #!/bin/bash
 PKG_VER=1.54.0
-PKG_ZIP_NAM=tailscale-$PKG_VER.zip
+PKG_ZIP_NAME=tailscale-$PKG_VER.zip
 PKG_ZIP_URL=https://cdn.jsdelivr.net/gh/requireCool/tailscale-alpine@master/packages/$PKG_ZIP_NAME
 
 wget $PKG_ZIP_URL
 if [ ! -n $PKG_ZIP_NAME ]; then
   echo "archive not exist"
   exit 1
+fi
 
 unzip $PKG_ZIP_NAME -d tailscale-$PKG_VER
 

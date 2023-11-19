@@ -12,7 +12,7 @@ fi
 unzip $PKG_ZIP_NAME -d tailscale-$PKG_VER
 
 service tailscale stop
-find . -name "*.apk" | xargs apk add --allow-untrusted
+find ./tailscale-$PKG_VER -name "*.apk" | xargs apk add --allow-untrusted
 service tailscale start
 
 rm -f $PKG_ZIP_NAME

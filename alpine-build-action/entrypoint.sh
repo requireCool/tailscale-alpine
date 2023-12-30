@@ -18,6 +18,8 @@ fi
 # skip go test
 sed -i 's/go test/# &/' APKBUILD
 
+cat APKBUILD
+
 # run abuild
 abuild-keygen -a -i -n
 abuild -F checksum && abuild -F -r

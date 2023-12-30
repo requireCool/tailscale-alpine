@@ -29,7 +29,15 @@ jobs:
         run: |
           pip install requests bs4
           python scripts/check_version.py
-      
+
+      - name: Commit & Push changes
+        if: ${{ steps.check_update.outputs.has_update }} == 'true'
+        uses: actions-js/push@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{  github.ref  }}
+          message: '[skip ci] auto update files with upstream. ${date}'
+
   build:
     needs: check
     if: needs.check.outputs.has_update == 'true'

@@ -39,7 +39,6 @@ def sync_files_with_upstream():
     bs = BeautifulSoup(requests.get(base_url).text, 'html.parser')
     file_list = [li.text for li in bs.find_all('li')]
     file_list.remove('../')
-    os.system("echo $PWD")
     for file_name in file_list:
         with open(f'src/{file_name}', 'wb') as f:
             f.write(requests.get(base_url + '/' + file_name).content)

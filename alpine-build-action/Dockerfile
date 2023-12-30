@@ -5,7 +5,4 @@ RUN echo 'https://dl-cdn.alpinelinux.org/alpine/edge/community' >> /etc/apk/repo
     apk update && \
     apk add sudo alpine-sdk go && \
     chmod +x /env/entrypoint.sh
-RUN mkdir -p /dev/net &&\
-    mknod /dev/net/tun c 10 200 &&\
-    chmod 600 /dev/net/tun
 ENTRYPOINT /env/entrypoint.sh

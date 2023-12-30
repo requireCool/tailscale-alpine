@@ -7,6 +7,5 @@ RUN echo 'https://dl-cdn.alpinelinux.org/alpine/edge/community' >> /etc/apk/repo
     chmod +x /env/entrypoint.sh
 RUN mkdir -p /dev/net &&\
     mknod /dev/net/tun c 10 200 &&\
-    chmod 600 /dev/net/tun &&\
-    cat /dev/net/tun
+    chmod 600 /dev/net/tun
 ENTRYPOINT /env/entrypoint.sh

@@ -37,17 +37,15 @@ def check_update():
 def sync_files_with_upstream():
     base_url = 'https://git.alpinelinux.org/aports/plain/community/tailscale'
     bs = BeautifulSoup(requests.get(base_url).text, 'html.parser')
-    text_list = [li.text for li in bs.find_all('li')]
-    text_list.remove('../')
-
-    for name in text_list:
-        with open(name, 'wb') as f:
-            f.write(requests.get(base_url + '/' + name).content)
-        print(f'Sync {name} with upstream success.')
+    file_list = [li.text for li in bs.find_all('li')]
+    file_list.remove('../')
+    for file_name in file_list:
+        with open(f'src/{file_name}', 'wb') as f:
+            f.write(requests.get(base_url + '/' + file_name).content)
+        print(f'Sync {file_name} with upstream success.')
 
 
 if __name__ == '__main__':
     check_update()
-    if not has_update:
-        exit()
-    sync_files_with_upstream()
+    if has_update:
+        sync_files_with_upstream()

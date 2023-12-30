@@ -1,6 +1,0 @@
-/var/log/tailscaled.log {
-        missingok
-        notifempty
-        sharedscripts
-        endscript
-}

@@ -29,7 +29,15 @@ jobs:
         run: |
           pip install requests bs4
           python scripts/check_version.py
-      
+
+      - name: Commit & Push changes
+        if: ${{ steps.check_update.outputs.has_update }} == 'true'
+        uses: actions-js/push@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{  github.ref  }}
+          message: '[skip ci] auto update files with upstream. ${date}'
+
   build:
     needs: check
     if: needs.check.outputs.has_update == 'true'
@@ -53,7 +61,7 @@ jobs:
           name: tailscale-${{  needs.check.outputs.pkgver  }}
           path: packages/*.apk
 
-  update-script:
+  upload:
     needs: [check, build]
     runs-on: ubuntu-latest
     env:
@@ -71,10 +79,11 @@ jobs:
     - name: Zip and Modify Script
       run: |
         cd packages
+        rm -rf ./*.zip
         zip tailscale-${{ env.PKGVER }}.zip *.apk
         rm -rf *.apk
         cd ..
-        sed -i "s/PKG_VER=.*/PKG_VER=$PKGVER/g" scripts/install.sh
+        sed -i "s/PKG_VER=.*/PKG_VER=$PKGVER/g" install.sh
       
     - name: Commit & Push changes
       uses: actions-js/push@master

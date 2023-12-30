@@ -12,5 +12,5 @@ Due to lack of signature, apks only can be installed with args --allow-untrusted
 Simply use:
 
 ```shell
-curl https://cdn.jsdelivr.net/gh/requireCool/tailscale-alpine@master/scripts/install.sh | sh
+curl https://cdn.jsdelivr.net/gh/requireCool/tailscale-alpine@master/install.sh | sh
 ```

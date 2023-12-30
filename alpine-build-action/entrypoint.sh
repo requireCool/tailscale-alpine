@@ -1,8 +1,5 @@
-echo "package version: $PKGVER"
-echo "package release: $PKGREL"
-sed -i "s/pkgver=.*/pkgver=$PKGVER/g" APKBUILD
-sed -i "s/pkgrel=.*/pkgrel=$PKGREL/g" APKBUILD
-
+cd src
+echo $PWD
 abuild-keygen -a -i -n
 abuild -F checksum && abuild -F -r
 

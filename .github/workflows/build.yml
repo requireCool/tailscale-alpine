@@ -40,9 +40,6 @@ jobs:
 
       - name: Alpine Build APK
         uses: ./alpine-build-action
-        with:
-          pkgver: ${{  needs.check.outputs.pkgver  }}
-          pkgrel: 1
 
       - name: Verify Artifacts
         run: ls packages
@@ -53,7 +50,7 @@ jobs:
           name: tailscale-${{  needs.check.outputs.pkgver  }}
           path: packages/*.apk
 
-  update-script:
+  upload:
     needs: [check, build]
     runs-on: ubuntu-latest
     env:
@@ -71,10 +68,11 @@ jobs:
     - name: Zip and Modify Script
       run: |
         cd packages
+        rm -rf ./*.zip
         zip tailscale-${{ env.PKGVER }}.zip *.apk
         rm -rf *.apk
         cd ..
-        sed -i "s/PKG_VER=.*/PKG_VER=$PKGVER/g" scripts/install.sh
+        sed -i "s/PKG_VER=.*/PKG_VER=$PKGVER/g" install.sh
       
     - name: Commit & Push changes
       uses: actions-js/push@master

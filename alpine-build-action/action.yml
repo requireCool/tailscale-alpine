@@ -1,16 +1,6 @@
 # action.yml
 name: 'Use alpine linux'
-description: ''
-inputs:
-  pkgver:
-    description: package version
-    required: true
-  pkgrel:
-    description: package release number
-    required: true
+description: 'use alpine linux to build apk'
 runs:
   using: 'docker'
   image: 'Dockerfile'
-  env:
-    PKGVER: ${{ inputs.pkgver }}
-    PKGREL: ${{ inputs.pkgrel }}

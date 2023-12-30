@@ -6,11 +6,11 @@ mknod /dev/net/tun c 10 200
 chmod 666 /dev/net/tun
 
 # replace version if needed
-if [[ $PKGVER != $(cat APKBUILD | grep "pkgver=") ]]; then
+if [[ "pkgver=$PKGVER" != $(cat APKBUILD | grep "pkgver=") ]]; then
     echo "set pkgver to $PKGVER"
     sed -i "s/pkgver=.*/pkgver=$PKGVER/g" APKBUILD
 fi
-if [[ $PKGREL != $(cat APKBUILD | grep "pkgrel=") ]]; then
+if [[ "pkgrel=$PKGREL" != $(cat APKBUILD | grep "pkgrel=") ]]; then
     echo "set pkgrel to $PKGREL"
     sed -i "s/pkgrel=.*/pkgrel=$PKGREL/g" APKBUILD
 fi
@@ -23,5 +23,4 @@ abuild-keygen -a -i -n
 abuild -F checksum && abuild -F -r
 
 # copy apk packages
-mkdir packages
-find / -name tailscale-*.apk -exec cp {} packages \;
+find / -name tailscale-*.apk | xargs echo {} && cp {} packages

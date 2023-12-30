@@ -1,9 +1,10 @@
+# Contributor: Andrei Jiroh Eugenio Halili <ajhalili2006@andreijiroh.eu.org>
 # Contributor: Robert Günzler <r@gnzler.io>
 # Contributor: Xe <xe@tailscale.com>
 # Maintainer: Robert Günzler <r@gnzler.io>
 pkgname=tailscale
-pkgver=1.50.1
-pkgrel=1
+pkgver=1.56.1
+pkgrel=0
 pkgdesc="The easiest, most secure way to use WireGuard and 2FA"
 url="https://tailscale.com/"
 license="BSD-3-Clause"
@@ -46,8 +47,7 @@ build() {
 
 check() {
 	# shellcheck disable=SC2046
-        msg2 "Skip check..."
-	# go test $(go list ./... | grep -Ev '(util/linuxfw|net/netcheck|wgengine/magicsock|tstest/archtest|tstest/integration|tstest/jsdeps|tstest/iosdeps|ssh/tailssh|containerboot|net/connstats)')
+	go test $(go list ./... | grep -Ev '(util/linuxfw|net/netcheck|wgengine/magicsock|tstest/archtest|tstest/integration|tstest/jsdeps|tstest/iosdeps|ssh/tailssh|containerboot|net/connstats)')
 }
 
 package() {
@@ -65,7 +65,7 @@ package() {
 }
 
 sha512sums="
-3eb0e0f0ef6df4d77f9649fb8deb8b829286bc8ab70016b09da6aad9aa4e5d027494e2151db425b52e775997345d39d13bce6013e8c69700023a936f142dcfd6  tailscale-1.50.1.tar.gz
+a6e213eeb885d160b816f7d795d8ae66cd322d652657ee5309e220c6526eb73d5aea07dcd57983468520891c5405fcb84255350cdacc078514cede8a351a4888  tailscale-1.56.1.tar.gz
 24706f10a6f5f7091c0f73a13e0c2d72e969e92e6f7aa21abe504f8e2c16af4d1d80fd28c33acbe4866dd8174abd9dc201d97eb5271f6355f7589a56f470f52c  tailscale.confd
 5cb35e0144d3bc2c20b1fde1ee402aab642b666c259bb324bf1c742a79fd8b3892cf2e7419e684764a50b6a29dc562ee674915bbf16a76eda543fd9c8988428c  tailscale.initd
 c139461ff829359bfdc66866ef4cd6561f781e2bc3b40e5cfe9c9d06e3e749d179835ee8548d2b2e725f9a59644db64b1136393dff78ae29955c905e76c8ef46  tailscale.logrotate

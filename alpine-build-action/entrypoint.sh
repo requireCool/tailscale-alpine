@@ -23,4 +23,4 @@ abuild-keygen -a -i -n
 abuild -F checksum && abuild -F -r
 
 # copy apk packages
-find / -name tailscale-*.apk | xargs cp {} packages
+cp /github/home/packages/workspace/x86_64/*.apk packages

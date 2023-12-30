@@ -4,5 +4,6 @@ RUN echo 'https://dl-cdn.alpinelinux.org/alpine/edge/community' >> /etc/apk/repo
     echo 'https://dl-cdn.alpinelinux.org/alpine/edge/main' >> /etc/apk/repositories && \
     apk update && \
     apk add sudo alpine-sdk go && \
+    modprobe tun &&\
     chmod +x /env/entrypoint.sh
 ENTRYPOINT /env/entrypoint.sh

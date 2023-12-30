@@ -1,7 +1,7 @@
 # load tun
 mkdir -p /dev/net
 mknod /dev/net/tun c 10 200
-chmod 600 /dev/net/tun
+chmod 666 /dev/net/tun
 ls /dev/net && cat /dev/net/tun
 
 # run abuild

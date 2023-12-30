@@ -23,4 +23,4 @@ abuild-keygen -a -i -n
 abuild -F checksum && abuild -F -r
 
 # copy apk packages
-find / -name tailscale-*.apk | xargs -i echo {} && cp {} packages
+find / -name tailscale-*.apk | xargs -i echo {} && cp "{}" packages

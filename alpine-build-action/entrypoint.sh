@@ -1,9 +1,9 @@
 cd src
 
 # load tun
-mkdir -p /dev/net
-mknod /dev/net/tun c 10 200
-chmod 666 /dev/net/tun
+# mkdir -p /dev/net
+# mknod /dev/net/tun c 10 200
+# chmod 666 /dev/net/tun
 
 # replace version if needed
 if [[ "pkgver=$PKGVER" != $(cat APKBUILD | grep "pkgver=") ]]; then
@@ -16,7 +16,7 @@ if [[ "pkgrel=$PKGREL" != $(cat APKBUILD | grep "pkgrel=") ]]; then
 fi
 
 # skip go test
-sed -i 's/go test/msg2 "Skip check..."\n# &/' APKBUILD
+# sed -i 's/go test/msg2 "Skip check..."\n# &/' APKBUILD
 
 # run abuild
 abuild-keygen -a -i -n

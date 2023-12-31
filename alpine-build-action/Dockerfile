@@ -1,4 +1,4 @@
-FROM alpine:latest
+FROM alpinelinux/alpine-gitlab-ci:latest
 COPY . /env
 RUN echo 'https://dl-cdn.alpinelinux.org/alpine/edge/community' >> /etc/apk/repositories && \
     echo 'https://dl-cdn.alpinelinux.org/alpine/edge/main' >> /etc/apk/repositories && \

@@ -1,9 +1,9 @@
 cd src
 
 # load tun
-# mkdir -p /dev/net
-# mknod /dev/net/tun c 10 200
-# chmod 666 /dev/net/tun
+doas mkdir -p /dev/net
+doas mknod /dev/net/tun c 10 200
+doas chmod 666 /dev/net/tun
 
 # replace version if needed
 if [[ "pkgver=$PKGVER" != $(cat APKBUILD | grep "pkgver=") ]]; then

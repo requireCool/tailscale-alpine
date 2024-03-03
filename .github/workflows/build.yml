@@ -1,4 +1,4 @@
-name: CI
+name: Build & Upload CI
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
   pull_request:
     branches: [ "master" ]
   schedule:
-    - cron: '0 0 * * mon'
+    - cron: '0 0 * * sat'
   workflow_dispatch:
 
 jobs:
@@ -17,10 +17,10 @@ jobs:
       pkgver: ${{ steps.check_update.outputs.pkgver }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: '3.x'
 
@@ -44,7 +44,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Alpine Build APK
         uses: ./alpine-build-action
@@ -68,7 +68,7 @@ jobs:
       PKGVER: ${{  needs.check.outputs.pkgver  }}
     steps:
     - name: Checkout
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     - name: Download Artifact
       uses: actions/download-artifact@v3

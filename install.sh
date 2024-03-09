@@ -1,5 +1,5 @@
 #!/bin/bash
-PKG_VER=1.60.0
+PKG_VER=1.60.1
 PKG_ZIP_NAME=tailscale-$PKG_VER.zip
 PKG_ZIP_URL=https://cdn.jsdelivr.net/gh/requireCool/tailscale-alpine@master/packages/$PKG_ZIP_NAME
 

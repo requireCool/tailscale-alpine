@@ -24,6 +24,5 @@ abuild -F checksum && abuild -F -r
 
 # copy apk packages
 PKG_DIR=/github/workspace/packages
-if [[ -d $PKG_DIR ]]; then
-    echo "文件夹存在"
+if [[ ! -d $PKG_DIR ]]; then mkdir $PKG_DIR
 cp /github/home/packages/workspace/x86_64/*.apk $PKG_DIR

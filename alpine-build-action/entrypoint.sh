@@ -23,4 +23,8 @@ abuild-keygen -a -i -n
 abuild -F checksum && abuild -F -r
 
 # copy apk packages
+echo "pwd"
+pwd
+echo "dir"
+ls /github/workspace
 cp /github/home/packages/workspace/x86_64/*.apk /github/workspace/packages

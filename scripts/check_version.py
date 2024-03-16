@@ -45,7 +45,13 @@ def sync_files_with_upstream():
         print(f'Sync {file_name} with upstream success.')
 
 
+def clean_src():
+    for f in os.listdir('src'):
+        os.remove('src/' + f)
+
+
 if __name__ == '__main__':
     check_update()
     if has_update:
+        clean_src()
         sync_files_with_upstream()

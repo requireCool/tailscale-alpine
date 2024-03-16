@@ -23,8 +23,7 @@ abuild-keygen -a -i -n
 abuild -F checksum && abuild -F -r
 
 # copy apk packages
-echo "pwd"
-pwd
-echo "dir"
-ls /github/workspace
-cp /github/home/packages/workspace/x86_64/*.apk /github/workspace/packages
+PKG_DIR=/github/workspace/packages
+if [[ -d $PKG_DIR ]]; then
+    echo "文件夹存在"
+cp /github/home/packages/workspace/x86_64/*.apk $PKG_DIR

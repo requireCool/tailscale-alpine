@@ -23,5 +23,6 @@ abuild-keygen -a -i -n
 abuild -F checksum && abuild -F -r
 
 # copy apk packages
-cd ..
-cp /github/home/packages/workspace/x86_64/*.apk packages
+PKG_DIR=/github/workspace/packages
+mkdir $PKG_DIR
+cp /github/home/packages/workspace/x86_64/*.apk $PKG_DIR

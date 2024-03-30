@@ -15,15 +15,16 @@ def check_update():
 
     tailscale_latest_release_url = 'https://api.github.com/repos/tailscale/tailscale/releases/latest'
     remote_version = requests.get(tailscale_latest_release_url).json()['name']
+    remote_version = str(remote_version).lstrip('v') if str(remote_version).startswith('v') else remote_version
     print('latest remote version:', remote_version)
 
     build_version = ''
     if os.path.exists('packages'):
         dirs = os.listdir('packages')
         dirs.sort(reverse=True)
+        print('all files in packages:', dirs)
         if len(dirs) > 0:
             build_version = dirs[0].split('-')[1].rstrip('.zip')
-            print('all files in "packages":', dirs)
             print('latest build version:', build_version)
 
     if remote_version == build_version:

@@ -3,8 +3,6 @@ name: Build & Upload CI
 on:
   push:
     branches: [ "develop" ]
-  pull_request:
-    branches: [ "master" ]
   schedule:
     - cron: '0 0 * * sat'
   workflow_dispatch:

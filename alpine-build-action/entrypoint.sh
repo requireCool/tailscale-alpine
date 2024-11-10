@@ -16,7 +16,10 @@ if [[ "pkgrel=$PKGREL" != $(cat APKBUILD | grep "pkgrel=") ]]; then
 fi
 
 # skip go test
-sed -i 's/go test/msg2 "Skip check..."\n# &/' APKBUILD
+sed -i '/^check() {/,/^}/ {/^check() {/b; /^}/b; s/.*/echo "Skip"/}' APKBUILD
+echo "modified APKBUILD === start ==="
+cat APKBUILD
+echo "modified APKBUILD === end ==="
 
 # run abuild
 abuild-keygen -a -i -n

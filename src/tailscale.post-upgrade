@@ -1,14 +1,7 @@
-#!/bin/sh
-
-ver_old="$2"
-
-if [ "$(apk version -t "$ver_old" '1.76.6-r1')" = '<' ]; then
-	cat >&2 <<-EOF
-	*
-	* If tailscale fails to connect after this upgrade, you may need to disable
-	* 'no_logs_no_support' in /etc/conf.d/tailscale.
-	*
-	EOF
-fi
-
-exit 0
+<html>
+<head><title>502 Bad Gateway</title></head>
+<body>
+<center><h1>502 Bad Gateway</h1></center>
+<hr><center>nginx/1.24.0</center>
+</body>
+</html>
